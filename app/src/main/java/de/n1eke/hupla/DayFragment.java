@@ -37,7 +37,7 @@ public class DayFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_hu_pla, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_month, container, false);
         ((TextView) rootView.findViewById(R.id.label_morning)).setText("Day");
         return rootView;
     }

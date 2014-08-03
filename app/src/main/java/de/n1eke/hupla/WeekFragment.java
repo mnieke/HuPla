@@ -37,8 +37,8 @@ public class WeekFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_hu_pla, container, false);
-        ((TextView) rootView.findViewById(R.id.label_morning)).setText("Week");
+        View rootView = inflater.inflate(R.layout.fragment_week, container, false);
+
         return rootView;
     }
 }

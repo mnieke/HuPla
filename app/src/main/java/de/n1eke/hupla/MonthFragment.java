@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CalendarView;
-import android.widget.TextView;
 
 /**
  * Created by michi on 02.08.14.
  */
-public class CalendarFragment extends Fragment{
+public class MonthFragment extends Fragment{
 
     /**
      * The fragment argument representing the section number for this
@@ -23,25 +21,21 @@ public class CalendarFragment extends Fragment{
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static CalendarFragment newInstance(int sectionNumber) {
-        CalendarFragment fragment = new CalendarFragment();
+    public static MonthFragment newInstance(int sectionNumber) {
+        MonthFragment fragment = new MonthFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public CalendarFragment() {
+    public MonthFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_hu_pla, container, false);
-        TextView testText = (TextView) rootView.findViewById(R.id.label_morning);
-//        calendarView.setMinimumHeight();
-//        ExtendedCalendarView extendedCalendarView = (ExtendedCalendarView) rootView.findViewById(R.id.calendar);
-//        extendedCalendarView.set
+        View rootView = inflater.inflate(R.layout.fragment_month, container, false);
 
         return rootView;
     }

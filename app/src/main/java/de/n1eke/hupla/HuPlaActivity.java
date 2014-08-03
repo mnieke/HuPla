@@ -84,7 +84,7 @@ public class HuPlaActivity extends Activity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    return CalendarFragment.newInstance(position + 1);
+                    return MonthFragment.newInstance(position + 1);
                 case 1:
                     return WeekFragment.newInstance(position+1);
                 case 2:
@@ -97,7 +97,7 @@ public class HuPlaActivity extends Activity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 1;
+            return 2;
         }
 
         @Override
@@ -143,7 +143,7 @@ public class HuPlaActivity extends Activity {
 //        @Override
 //        public View onCreateView(LayoutInflater inflater, ViewGroup container,
 //                Bundle savedInstanceState) {
-//            View rootView = inflater.inflate(R.layout.fragment_hu_pla, container, false);
+//            View rootView = inflater.inflate(R.layout.fragment_month, container, false);
 //            return rootView;
 //        }
 //    }
