@@ -3,20 +3,13 @@ package de.n1eke.hupla;
 import java.util.Locale;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 
 public class HuPlaActivity extends Activity {
@@ -91,7 +84,7 @@ public class HuPlaActivity extends Activity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    return MonthFragment.newInstance(position+1);
+                    return CalendarFragment.newInstance(position + 1);
                 case 1:
                     return WeekFragment.newInstance(position+1);
                 case 2:
@@ -104,7 +97,7 @@ public class HuPlaActivity extends Activity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 1;
         }
 
         @Override
