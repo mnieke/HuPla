@@ -1,6 +1,7 @@
 package de.n1eke.hupla.data;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,5 +36,27 @@ public class DataHolder {
 
     public void setEntryList(List<HuPlaEntry> entryList) {
         this.entryList = entryList;
+    }
+
+    /**
+     * Searches the list of HuPlaEntries for an entry matching the date and time. May be null if not available
+     * @param year Year which the entry should have
+     * @param month month which the entry should have
+     * @param day Day which the entry should have
+     * @param time Time which the entry should have
+     * @return The entry having the specified date and time. May be null if not available
+     */
+    public HuPlaEntry findHuPlaEntryByDate(int year, int month, int day, HuPlaTime time) {
+        HuPlaEntry huPlaEntry = null;
+
+        synchronized (entryList) {
+            for(HuPlaEntry entry : entryList) {
+                if(entry.equalDates(year, month, day) && entry.getHuPlaTime().equals(time)) {
+                    return entry;
+                }
+            }
+        }
+
+        return huPlaEntry;
     }
 }

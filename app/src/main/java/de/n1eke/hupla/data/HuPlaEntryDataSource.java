@@ -10,7 +10,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -26,12 +28,9 @@ public class HuPlaEntryDataSource {
 
     private boolean opened;
 
-    private DateFormat dateFormat;
-
     public HuPlaEntryDataSource(Context context) {
         dbHelper = new HuPlaDataSQLiteHelper(context);
         opened = false;
-        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     }
 
     public void open() throws SQLException {
@@ -44,12 +43,12 @@ public class HuPlaEntryDataSource {
         opened = false;
     }
 
-    public HuPlaEntry createHuPlaEntry(Date date, HuPlaTime time, HuPlaType type) {
+    public HuPlaEntry createHuPlaEntry(GregorianCalendar calendar, HuPlaTime time, HuPlaType type) {
         if(!opened)
             return null;
 
 
-        String dateString = dateFormat.format(date);
+        String dateString = calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
 
         ContentValues values = new ContentValues();
         values.put(HuPlaDataSQLiteHelper.COLUMN_DATE, dateString);
@@ -95,16 +94,34 @@ public class HuPlaEntryDataSource {
     }
 
     private HuPlaEntry cursorToEntry(Cursor cursor) {
-        try {
             long id = cursor.getLong(0);
-            String dateString = cursor.getString(1);
-            Date date = dateFormat.parse(dateString);
+//            Date date = dateFormat.parse(dateString);
+            GregorianCalendar calendar = parseDate(cursor.getString(1));
             HuPlaTime time = HuPlaTime.getTimeFromString(cursor.getString(2));
             HuPlaType type = HuPlaType.getHuPlaTypeByDatabaseID(cursor.getInt(3));
-            HuPlaEntry entry = new HuPlaEntry(id, date, time, type);
+            HuPlaEntry entry = new HuPlaEntry(id, calendar, time, type);
             return entry;
-        } catch (ParseException e) {
-            e.printStackTrace();
+    }
+
+    private GregorianCalendar parseDate(String date) {
+        String[] dateSplits = date.split("-");
+        if(dateSplits.length != 3) {
+            return null;
+        }
+
+        try {
+            int year = Integer.parseInt(dateSplits[0]);
+            int month = Integer.parseInt(dateSplits[1]);
+            int day = Integer.parseInt(dateSplits[2]);
+
+            GregorianCalendar calendar = new GregorianCalendar();
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, day);
+
+            return calendar;
+        } catch (NumberFormatException numFormat) {
+            numFormat.printStackTrace();
         }
 
         return null;

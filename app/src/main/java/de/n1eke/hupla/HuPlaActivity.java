@@ -1,5 +1,9 @@
 package de.n1eke.hupla;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
@@ -10,6 +14,12 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import de.n1eke.hupla.data.DataHolder;
+import de.n1eke.hupla.data.HuPlaEntry;
+import de.n1eke.hupla.data.HuPlaEntryDataSource;
+import de.n1eke.hupla.data.HuPlaTime;
+import de.n1eke.hupla.data.HuPlaType;
 
 
 public class HuPlaActivity extends Activity {
@@ -44,6 +54,16 @@ public class HuPlaActivity extends Activity {
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        // Getting the data out of the SQL database
+        HuPlaEntryDataSource dataSource = new HuPlaEntryDataSource(this);
+        dataSource.open();
+        // Dummy data
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.set(2014, Calendar.AUGUST, 5);
+//        HuPlaEntry entry = dataSource.createHuPlaEntry(calendar, HuPlaTime.NOON, HuPlaType.WOLF);
+
+        DataHolder.getInstance().setEntryList(dataSource.getAllHuPlaEntries());
+        dataSource.close();
     }
 
 
