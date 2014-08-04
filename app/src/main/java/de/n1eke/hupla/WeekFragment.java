@@ -1,20 +1,15 @@
 package de.n1eke.hupla;
 
 import android.app.Fragment;
-import android.content.res.AssetManager;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import de.n1eke.hupla.data.DataHolder;
 
 /**
  * Created by michi on 02.08.14.

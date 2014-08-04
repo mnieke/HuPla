@@ -1,4 +1,7 @@
-package de.n1eke.hupla;
+package de.n1eke.hupla.data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by michi on 03.08.14.
@@ -7,8 +10,10 @@ public class DataHolder {
 
     private static volatile DataHolder instance;
 
-    private DataHolder() {
+    private List<HuPlaEntry> entryList;
 
+    private DataHolder() {
+        entryList = new ArrayList<HuPlaEntry>();
     }
 
     public static DataHolder getInstance() {
@@ -23,4 +28,12 @@ public class DataHolder {
         return instance;
     }
 
+
+    public List<HuPlaEntry> getEntryList() {
+        return entryList;
+    }
+
+    public void setEntryList(List<HuPlaEntry> entryList) {
+        this.entryList = entryList;
+    }
 }
