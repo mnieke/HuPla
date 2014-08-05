@@ -170,7 +170,7 @@ public class WeekFragment extends HuPlaFragment {
     }
 
     private void updateCurrentWeekButtonText() {
-        buttonCurrentWeek.setText(startDate.get(Calendar.DAY_OF_MONTH) + "." + startDate.get(Calendar.MONTH) + "." + startDate.get(Calendar.YEAR) + " - " + endDate.get(Calendar.DAY_OF_MONTH) + "." + endDate.get(Calendar.MONTH) + "." + endDate.get(Calendar.YEAR));
+        buttonCurrentWeek.setText(startDate.get(Calendar.DAY_OF_MONTH) + "." + (startDate.get(Calendar.MONTH)+1) + "." + startDate.get(Calendar.YEAR) + " - " + endDate.get(Calendar.DAY_OF_MONTH) + "." + (endDate.get(Calendar.MONTH)+1) + "." + endDate.get(Calendar.YEAR));
     }
 
     private void resetDate() {

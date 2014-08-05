@@ -57,6 +57,11 @@ public class HuPlaActivity extends Activity implements ViewPager.OnPageChangeLis
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setOnPageChangeListener(this);
 
+
+        HuPlaEntryDataSource dataSource = new HuPlaEntryDataSource(this);
+        dataSource.open();
+        DataHolder.getInstance().setEntryList(dataSource.getAllHuPlaEntries());
+        dataSource.close();
     }
 
 
