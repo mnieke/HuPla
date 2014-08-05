@@ -45,7 +45,6 @@ public class HuPlaActivity extends Activity {
         setContentView(R.layout.activity_hu_pla);
 
 
-
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
@@ -86,7 +85,6 @@ public class HuPlaActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -106,9 +104,9 @@ public class HuPlaActivity extends Activity {
                 case 0:
                     return WeekFragment.newInstance(position + 1);
                 case 1:
-                    return MonthFragment.newInstance(position+1);
+                    return MonthFragment.newInstance(position + 1);
                 default:
-                    return WeekFragment.newInstance(position+1);
+                    return WeekFragment.newInstance(position + 1);
             }
         }
 

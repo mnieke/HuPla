@@ -23,7 +23,7 @@ public class HuPlaDataSQLiteHelper extends SQLiteOpenHelper {
             + TABLE_HUPLA + "(" + COLUMN_ID
             + " integer primary key autoincrement, " + COLUMN_DATE
             + " text not null, "
-            + COLUMN_TIME +" text not null, "+ COLUMN_TYPE +" integer not null);";
+            + COLUMN_TIME + " text not null, " + COLUMN_TYPE + " integer not null);";
 
 
     public HuPlaDataSQLiteHelper(Context context) {

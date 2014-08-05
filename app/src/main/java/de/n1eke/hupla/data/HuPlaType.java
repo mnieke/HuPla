@@ -10,7 +10,7 @@ public enum HuPlaType {
     NA, BLUE, GREEN, RED, ORANGE, YELLOW, GREY, HEART, SHEEP, DOG, WOLF;
 
     public int getDrawbaleId() {
-        switch(this) {
+        switch (this) {
             case NA:
                 return R.drawable.empty;
             case BLUE:
@@ -68,7 +68,7 @@ public enum HuPlaType {
     }
 
     public static HuPlaType getHuPlaTypeByDatabaseID(int databaseID) {
-        switch(databaseID) {
+        switch (databaseID) {
             case 0:
                 return NA;
             case 1:
@@ -97,7 +97,7 @@ public enum HuPlaType {
     }
 
     public static HuPlaType getHuPlaTypeByDrawableID(int drawableID) {
-        switch(drawableID) {
+        switch (drawableID) {
             case R.drawable.empty:
                 return NA;
             case R.drawable.circle_blue:

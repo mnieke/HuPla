@@ -9,7 +9,7 @@ public enum HuPlaTime {
 
     @Override
     public String toString() {
-        switch(this) {
+        switch (this) {
             case MORNING:
                 return "morning";
             case NOON:
@@ -22,11 +22,11 @@ public enum HuPlaTime {
     }
 
     public static HuPlaTime getTimeFromString(String s) {
-        if(s.equals(MORNING.toString())) {
+        if (s.equals(MORNING.toString())) {
             return MORNING;
-        } else if(s.equals(NOON.toString())) {
+        } else if (s.equals(NOON.toString())) {
             return NOON;
-        } else if(s.equals(EVENING.toString())) {
+        } else if (s.equals(EVENING.toString())) {
             return EVENING;
         } else {
             return null;

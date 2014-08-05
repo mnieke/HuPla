@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@android:drawable/screen_background_light">
+
+    <TableLayout
+        android:id="@+id/table_layout_popup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:shrinkColumns="*"
+        android:stretchColumns="*">
+
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/image_button_wolf"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/wolf"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
+
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/image_button_heart"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/heart"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/image_button_sheep"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/sheep"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/image_button_circle_blue"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/circle_blue"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
+
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/image_button_circle_green"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/circle_green"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/image_button_circle_red"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/circle_red"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/image_button_circle_grey"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/circle_grey"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
+
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/image_button_circle_orange"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/circle_orange"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/image_button_circle_yellow"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/circle_yellow"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/image_button_dog"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dog"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
+
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:clickable="false"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitCenter"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:clickable="false"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitCenter"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
+        </TableRow>
+
+
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:clickable="false"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitCenter"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
+
+
+            <Button
+                android:id="@+id/image_button_na"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitCenter"
+                android:text="@string/empty"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:clickable="false"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitCenter"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
+        </TableRow>
+
+
+    </TableLayout>
+
+
+</ScrollView>

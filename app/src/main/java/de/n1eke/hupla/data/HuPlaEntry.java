@@ -15,7 +15,7 @@ public class HuPlaEntry {
     private GregorianCalendar date;
 
 
-    protected HuPlaEntry(long databaseID, GregorianCalendar date, HuPlaTime huPlaTime, HuPlaType huPlaType){
+    protected HuPlaEntry(long databaseID, GregorianCalendar date, HuPlaTime huPlaTime, HuPlaType huPlaType) {
         this.date = date;
         this.huPlaType = huPlaType;
         this.huPlaTime = huPlaTime;
@@ -27,7 +27,7 @@ public class HuPlaEntry {
     }
 
     public void setDate(GregorianCalendar date) {
-        if(date != null)
+        if (date != null)
             this.date = date;
     }
 
@@ -36,7 +36,7 @@ public class HuPlaEntry {
     }
 
     public void setHuPlaType(HuPlaType huPlaType) {
-        if(huPlaType != null)
+        if (huPlaType != null)
             this.huPlaType = huPlaType;
     }
 
@@ -45,7 +45,7 @@ public class HuPlaEntry {
     }
 
     public void setHuPlaTime(HuPlaTime huPlaTime) {
-        if(huPlaTime != null)
+        if (huPlaTime != null)
             this.huPlaTime = huPlaTime;
     }
 
@@ -58,11 +58,11 @@ public class HuPlaEntry {
     }
 
     public boolean equalDates(int year, int month, int day) {
-        if(date == null) {
+        if (date == null) {
             return false;
         }
 
-        if(year == this.date.get(GregorianCalendar.YEAR) && day == this.date.get(GregorianCalendar.DAY_OF_MONTH) && month == this.date.get(GregorianCalendar.MONTH)) {
+        if (year == this.date.get(GregorianCalendar.YEAR) && day == this.date.get(GregorianCalendar.DAY_OF_MONTH) && month == this.date.get(GregorianCalendar.MONTH)) {
             return true;
         }
 

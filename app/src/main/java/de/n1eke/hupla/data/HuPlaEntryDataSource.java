@@ -23,8 +23,8 @@ public class HuPlaEntryDataSource {
 
     private SQLiteDatabase database;
     private HuPlaDataSQLiteHelper dbHelper;
-    private String[] allColumns = { HuPlaDataSQLiteHelper.COLUMN_ID,
-            HuPlaDataSQLiteHelper.COLUMN_DATE, HuPlaDataSQLiteHelper.COLUMN_TIME, HuPlaDataSQLiteHelper.COLUMN_TYPE };
+    private String[] allColumns = {HuPlaDataSQLiteHelper.COLUMN_ID,
+            HuPlaDataSQLiteHelper.COLUMN_DATE, HuPlaDataSQLiteHelper.COLUMN_TIME, HuPlaDataSQLiteHelper.COLUMN_TYPE};
 
     private boolean opened;
 
@@ -44,18 +44,18 @@ public class HuPlaEntryDataSource {
     }
 
     public HuPlaEntry createHuPlaEntry(GregorianCalendar calendar, HuPlaTime time, HuPlaType type) {
-        if(!opened)
+        if (!opened)
             return null;
 
 
-        String dateString = calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
+        String dateString = calendar.get(Calendar.YEAR) + "-" + calendar.get(Calendar.MONTH) + "-" + calendar.get(Calendar.DAY_OF_MONTH);
 
         ContentValues values = new ContentValues();
         values.put(HuPlaDataSQLiteHelper.COLUMN_DATE, dateString);
         values.put(HuPlaDataSQLiteHelper.COLUMN_TIME, time.toString());
         values.put(HuPlaDataSQLiteHelper.COLUMN_TYPE, type.getDatabaseID());
         long insertId = database.insert(HuPlaDataSQLiteHelper.TABLE_HUPLA, null, values);
-        Cursor cursor = database.query(HuPlaDataSQLiteHelper.TABLE_HUPLA, allColumns, HuPlaDataSQLiteHelper.COLUMN_ID + " = " + insertId, null,null, null, null);
+        Cursor cursor = database.query(HuPlaDataSQLiteHelper.TABLE_HUPLA, allColumns, HuPlaDataSQLiteHelper.COLUMN_ID + " = " + insertId, null, null, null, null);
         cursor.moveToFirst();
         HuPlaEntry newEntry = cursorToEntry(cursor);
         cursor.close();
@@ -63,7 +63,7 @@ public class HuPlaEntryDataSource {
     }
 
     public boolean deleteHuPlaEntry(HuPlaEntry entry) {
-        if(!opened)
+        if (!opened)
             return false;
 
         long id = entry.getDatabaseID();
@@ -74,7 +74,7 @@ public class HuPlaEntryDataSource {
     }
 
     public List<HuPlaEntry> getAllHuPlaEntries() {
-        if(!opened)
+        if (!opened)
             return null;
 
         List<HuPlaEntry> entries = new ArrayList<HuPlaEntry>();
@@ -94,18 +94,18 @@ public class HuPlaEntryDataSource {
     }
 
     private HuPlaEntry cursorToEntry(Cursor cursor) {
-            long id = cursor.getLong(0);
+        long id = cursor.getLong(0);
 //            Date date = dateFormat.parse(dateString);
-            GregorianCalendar calendar = parseDate(cursor.getString(1));
-            HuPlaTime time = HuPlaTime.getTimeFromString(cursor.getString(2));
-            HuPlaType type = HuPlaType.getHuPlaTypeByDatabaseID(cursor.getInt(3));
-            HuPlaEntry entry = new HuPlaEntry(id, calendar, time, type);
-            return entry;
+        GregorianCalendar calendar = parseDate(cursor.getString(1));
+        HuPlaTime time = HuPlaTime.getTimeFromString(cursor.getString(2));
+        HuPlaType type = HuPlaType.getHuPlaTypeByDatabaseID(cursor.getInt(3));
+        HuPlaEntry entry = new HuPlaEntry(id, calendar, time, type);
+        return entry;
     }
 
     private GregorianCalendar parseDate(String date) {
         String[] dateSplits = date.split("-");
-        if(dateSplits.length != 3) {
+        if (dateSplits.length != 3) {
             return null;
         }
 

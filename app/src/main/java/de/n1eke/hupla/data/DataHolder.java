@@ -18,9 +18,9 @@ public class DataHolder {
     }
 
     public static DataHolder getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             synchronized (DataHolder.class) {
-                if(instance == null) {
+                if (instance == null) {
                     instance = new DataHolder();
                 }
             }
@@ -40,18 +40,19 @@ public class DataHolder {
 
     /**
      * Searches the list of HuPlaEntries for an entry matching the date and time. May be null if not available
-     * @param year Year which the entry should have
+     *
+     * @param year  Year which the entry should have
      * @param month month which the entry should have
-     * @param day Day which the entry should have
-     * @param time Time which the entry should have
+     * @param day   Day which the entry should have
+     * @param time  Time which the entry should have
      * @return The entry having the specified date and time. May be null if not available
      */
     public HuPlaEntry findHuPlaEntryByDate(int year, int month, int day, HuPlaTime time) {
         HuPlaEntry huPlaEntry = null;
 
         synchronized (entryList) {
-            for(HuPlaEntry entry : entryList) {
-                if(entry.equalDates(year, month, day) && entry.getHuPlaTime().equals(time)) {
+            for (HuPlaEntry entry : entryList) {
+                if (entry.equalDates(year, month, day) && entry.getHuPlaTime().equals(time)) {
                     return entry;
                 }
             }
