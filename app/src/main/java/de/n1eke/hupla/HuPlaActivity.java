@@ -9,6 +9,11 @@ import java.util.Locale;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.provider.Settings;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -24,6 +29,9 @@ import de.n1eke.hupla.data.HuPlaType;
 
 
 public class HuPlaActivity extends Activity implements ViewPager.OnPageChangeListener{
+
+
+    // TODO Settings, Widget
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -62,6 +70,25 @@ public class HuPlaActivity extends Activity implements ViewPager.OnPageChangeLis
         dataSource.open();
         DataHolder.getInstance().setEntryList(dataSource.getAllHuPlaEntries());
         dataSource.close();
+
+
+    }
+
+    @Override
+    public void onPause() {
+        Intent dayWidgetIntent = new Intent(this, HuPlaDayWidget.class);
+        dayWidgetIntent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
+        int dayWidgetIds[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), HuPlaDayWidget.class));
+        dayWidgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, dayWidgetIds);
+        sendBroadcast(dayWidgetIntent);
+
+        Intent weekWidgetIntent = new Intent(this, HuPlaWeekWidget.class);
+        weekWidgetIntent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
+        int weekWidgetIds[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), HuPlaWeekWidget.class));
+        weekWidgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, weekWidgetIds);
+        sendBroadcast(weekWidgetIntent);
+
+        super.onPause();
     }
 
 

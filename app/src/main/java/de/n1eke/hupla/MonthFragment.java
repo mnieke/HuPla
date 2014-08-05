@@ -148,7 +148,6 @@ public class MonthFragment extends HuPlaFragment implements CalendarView.OnDateC
     @Override
     public void imageWasSelected(HuPlaType huPlaType) {
         isPopupOpened = false;
-        // TODO Settings
         if(huPlaType == null) {
             return;
         }

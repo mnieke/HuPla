@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/widget_margin"
+    android:background="@android:drawable/screen_background_light_transparent">
+
+    <TextView
+        android:id="@+id/text_view_day_widget_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hundeplan for DATUM"
+        android:layout_centerHorizontal="true"
+        android:textSize="15dp"
+        android:textColor="@android:color/black"/>
+
+
+    <TextView
+        android:layout_below="@+id/text_view_day_widget_date"
+        android:id="@+id/text_view_day_widget_morning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_morning"
+        android:textSize="15dp"
+        android:paddingLeft="25dp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:layout_below="@+id/text_view_day_widget_date"
+        android:id="@+id/text_view_day_widget_noon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_noon"
+        android:textSize="15dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:layout_below="@+id/text_view_day_widget_date"
+        android:id="@+id/text_view_day_widget_evening"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_evening"
+        android:textSize="15dp"
+        android:layout_alignParentRight="true"
+        android:paddingRight="25dp"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:layout_below="@+id/text_view_day_widget_morning"
+        android:id="@+id/image_view_day_widget_morning"
+        android:layout_alignParentLeft="true"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/text_view_day_widget_morning"
+        android:id="@+id/image_view_day_widget_noon"
+        android:layout_centerHorizontal="true"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/text_view_day_widget_morning"
+        android:id="@+id/image_view_day_widget_evening"
+        android:layout_alignParentRight="true"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+</RelativeLayout>

@@ -1,0 +1,356 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/widget_margin"
+    android:background="@android:drawable/screen_background_light_transparent" >
+    <TextView
+        android:id="@+id/text_view_week_widget_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hundeplan for DATUM"
+        android:layout_centerHorizontal="true"
+        android:textSize="15dp"
+        android:textColor="@android:color/black"/>
+
+
+    <TextView
+        android:layout_below="@+id/text_view_week_widget_date"
+        android:id="@+id/text_view_week_widget_morning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_morning"
+        android:textSize="15dp"
+        android:layout_toLeftOf="@+id/text_view_week_widget_noon"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:layout_below="@+id/text_view_week_widget_date"
+        android:id="@+id/text_view_week_widget_noon"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_noon"
+        android:textSize="15dp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:layout_below="@+id/text_view_week_widget_date"
+        android:layout_toRightOf="@+id/text_view_week_widget_noon"
+        android:id="@+id/text_view_week_widget_evening"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_evening"
+        android:textSize="15dp"
+        android:gravity="center_horizontal"
+        android:layout_alignParentRight="true"
+        android:paddingRight="25dp"
+        android:textColor="@android:color/black"/>
+
+    <!-- MONDAY -->
+
+    <TextView
+        android:id="@+id/text_view_week_widget_monday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/text_view_week_widget_morning"
+        android:textSize="15dp"
+        android:textColor="@android:color/black"
+        android:text="Mo"/>
+
+    <ImageView
+        android:layout_below="@+id/text_view_week_widget_morning"
+        android:layout_toRightOf="@+id/text_view_week_widget_monday"
+        android:layout_toLeftOf="@+id/image_view_week_widget_monday_noon"
+        android:id="@+id/image_view_week_widget_monday_morning"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:gravity="center_horizontal"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/text_view_week_widget_morning"
+        android:id="@+id/image_view_week_widget_monday_noon"
+        android:layout_centerHorizontal="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/text_view_week_widget_morning"
+        android:id="@+id/image_view_week_widget_monday_evening"
+        android:layout_toRightOf="@+id/image_view_week_widget_monday_noon"
+        android:gravity="center_horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <!-- TUESDAY -->
+
+    <TextView
+        android:id="@+id/text_view_week_widget_tuesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/image_view_week_widget_monday_evening"
+        android:layout_alignBaseline="@+id/image_view_week_widget_tuesday_morning"
+        android:textSize="15dp"
+        android:textColor="@android:color/black"
+        android:text="Tu"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_monday_evening"
+        android:layout_toRightOf="@+id/text_view_week_widget_monday"
+        android:layout_toLeftOf="@+id/image_view_week_widget_tuesday_noon"
+        android:id="@+id/image_view_week_widget_tuesday_morning"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_monday_evening"
+        android:id="@+id/image_view_week_widget_tuesday_noon"
+        android:layout_toRightOf="@+id/image_view_week_widget_monday_morning"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_monday_evening"
+        android:id="@+id/image_view_week_widget_tuesday_evening"
+        android:layout_toRightOf="@+id/image_view_week_widget_monday_noon"
+        android:gravity="center_horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <!-- WEDNESDAY -->
+
+
+    <TextView
+        android:id="@+id/text_view_week_widget_wednesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/image_view_week_widget_tuesday_evening"
+        android:layout_alignBaseline="@+id/image_view_week_widget_wednesday_morning"
+        android:textSize="15dp"
+        android:textColor="@android:color/black"
+        android:text="We"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_tuesday_evening"
+        android:layout_toRightOf="@+id/text_view_week_widget_monday"
+        android:layout_toLeftOf="@+id/image_view_week_widget_wednesday_noon"
+        android:id="@+id/image_view_week_widget_wednesday_morning"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_tuesday_evening"
+        android:id="@+id/image_view_week_widget_wednesday_noon"
+        android:layout_toRightOf="@+id/image_view_week_widget_monday_morning"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_tuesday_evening"
+        android:id="@+id/image_view_week_widget_wednesday_evening"
+        android:layout_toRightOf="@+id/image_view_week_widget_monday_noon"
+        android:gravity="center_horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <!-- THURSDAY -->
+
+
+
+    <TextView
+        android:id="@+id/text_view_week_widget_thursday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/image_view_week_widget_wednesday_evening"
+        android:textSize="15dp"
+        android:textColor="@android:color/black"
+        android:layout_alignBaseline="@+id/image_view_week_widget_thursday_morning"
+        android:text="Th"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_wednesday_evening"
+        android:layout_toRightOf="@+id/text_view_week_widget_monday"
+        android:layout_toLeftOf="@+id/image_view_week_widget_thursday_noon"
+        android:id="@+id/image_view_week_widget_thursday_morning"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_wednesday_evening"
+        android:id="@+id/image_view_week_widget_thursday_noon"
+        android:layout_toRightOf="@+id/image_view_week_widget_monday_morning"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_wednesday_evening"
+        android:id="@+id/image_view_week_widget_thursday_evening"
+        android:layout_toRightOf="@+id/image_view_week_widget_monday_noon"
+        android:gravity="center_horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <!-- FRIDAY -->
+
+
+
+    <TextView
+        android:id="@+id/text_view_week_widget_friday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/image_view_week_widget_thursday_evening"
+        android:textSize="15dp"
+        android:textColor="@android:color/black"
+        android:layout_alignBaseline="@+id/image_view_week_widget_friday_morning"
+        android:text="Fr"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_thursday_evening"
+        android:layout_toRightOf="@+id/text_view_week_widget_monday"
+        android:layout_toLeftOf="@+id/image_view_week_widget_friday_noon"
+        android:id="@+id/image_view_week_widget_friday_morning"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_thursday_evening"
+        android:id="@+id/image_view_week_widget_friday_noon"
+        android:layout_toRightOf="@+id/image_view_week_widget_monday_morning"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_thursday_evening"
+        android:id="@+id/image_view_week_widget_friday_evening"
+        android:layout_toRightOf="@+id/image_view_week_widget_monday_noon"
+        android:gravity="center_horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <!-- SATURDAY -->
+    <TextView
+        android:id="@+id/text_view_week_widget_saturday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/image_view_week_widget_friday_evening"
+        android:textSize="15dp"
+        android:textColor="@android:color/black"
+        android:layout_alignBaseline="@+id/image_view_week_widget_saturday_morning"
+        android:text="Sa"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_friday_evening"
+        android:layout_toRightOf="@+id/text_view_week_widget_monday"
+        android:layout_toLeftOf="@+id/image_view_week_widget_friday_noon"
+        android:id="@+id/image_view_week_widget_saturday_morning"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_friday_evening"
+        android:id="@+id/image_view_week_widget_saturday_noon"
+        android:layout_toRightOf="@+id/image_view_week_widget_monday_morning"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_friday_evening"
+        android:id="@+id/image_view_week_widget_saturday_evening"
+        android:layout_toRightOf="@+id/image_view_week_widget_monday_noon"
+        android:gravity="center_horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <!-- SUNDAY -->
+
+    <TextView
+        android:id="@+id/text_view_week_widget_sunday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/image_view_week_widget_saturday_evening"
+        android:textSize="15dp"
+        android:textColor="@android:color/black"
+        android:layout_alignBaseline="@+id/image_view_week_widget_sunday_morning"
+        android:text="Su"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_saturday_evening"
+        android:layout_toRightOf="@+id/text_view_week_widget_monday"
+        android:layout_toLeftOf="@+id/image_view_week_widget_sunday_noon"
+        android:id="@+id/image_view_week_widget_sunday_morning"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_saturday_evening"
+        android:id="@+id/image_view_week_widget_sunday_noon"
+        android:layout_toRightOf="@+id/image_view_week_widget_monday_morning"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_below="@+id/image_view_week_widget_saturday_evening"
+        android:id="@+id/image_view_week_widget_sunday_evening"
+        android:layout_toRightOf="@+id/image_view_week_widget_sunday_noon"
+        android:gravity="center_horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
+</RelativeLayout>
