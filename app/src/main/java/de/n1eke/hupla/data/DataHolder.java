@@ -1,6 +1,7 @@
 package de.n1eke.hupla.data;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -59,5 +60,9 @@ public class DataHolder {
         }
 
         return huPlaEntry;
+    }
+
+    public HuPlaEntry findHuPlaEntryByCalendar(Calendar calendar, HuPlaTime huPlaTime) {
+        return findHuPlaEntryByDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), huPlaTime);
     }
 }

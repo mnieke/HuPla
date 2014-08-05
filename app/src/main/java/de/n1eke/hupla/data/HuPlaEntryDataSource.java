@@ -126,4 +126,29 @@ public class HuPlaEntryDataSource {
 
         return null;
     }
+
+    public void setHuPlaTypeForEntry(HuPlaEntry entry, HuPlaType type, HuPlaTime time, GregorianCalendar calendar) {
+        DataHolder dataHolder = DataHolder.getInstance();
+
+        if(entry != null && !type.equals(entry.getHuPlaType())) {
+            deleteHuPlaEntry(entry);
+            dataHolder.getEntryList().remove(entry);
+
+            if(type != HuPlaType.NA) {
+                HuPlaEntry newEntry = createHuPlaEntry(entry.getDate(), entry.getHuPlaTime(), type);
+
+                if(newEntry != null) {
+                    dataHolder.getEntryList().add(newEntry);
+                }
+            }
+
+
+        } else if(entry == null && type != HuPlaType.NA) {
+            HuPlaEntry newEntry = createHuPlaEntry(calendar, time, type);
+
+            if(newEntry != null) {
+                dataHolder.getEntryList().add(newEntry);
+            }
+        }
+    }
 }

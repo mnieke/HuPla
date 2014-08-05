@@ -2,10 +2,12 @@ package de.n1eke.hupla;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -18,14 +20,17 @@ import java.util.HashMap;
 
 import de.n1eke.hupla.data.DataHolder;
 import de.n1eke.hupla.data.HuPlaEntry;
+import de.n1eke.hupla.data.HuPlaEntryDataSource;
 import de.n1eke.hupla.data.HuPlaTime;
 import de.n1eke.hupla.data.HuPlaType;
+import de.n1eke.hupla.data.PopupWindowButtonHandler;
 
 /**
  * Created by michi on 02.08.14.
  */
 public class WeekFragment extends Fragment implements View.OnClickListener, ImageSelectedListener {
 
+    private View rootView;
 
     private TextView currentWeekTextView;
 
@@ -65,6 +70,8 @@ public class WeekFragment extends Fragment implements View.OnClickListener, Imag
     private ImageButton imageButtonSundayNoon;
     private ImageButton imageButtonSundayEvening;
 
+    private View buttonSelected;
+
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -89,7 +96,7 @@ public class WeekFragment extends Fragment implements View.OnClickListener, Imag
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_week, container, false);
+        rootView = inflater.inflate(R.layout.fragment_week, container, false);
 
         currentWeekTextView = (TextView) rootView.findViewById(R.id.text_view_week);
         startDate = new GregorianCalendar();
@@ -101,32 +108,53 @@ public class WeekFragment extends Fragment implements View.OnClickListener, Imag
         ((ImageButton) rootView.findViewById(R.id.image_button_previous_week)).setOnClickListener(this);
 
         imageButtonMondayMorning = (ImageButton) rootView.findViewById(R.id.image_button_monday_morning);
+        imageButtonMondayMorning.setOnClickListener(this);
         imageButtonMondayNoon = (ImageButton) rootView.findViewById(R.id.image_button_monday_noon);
+        imageButtonMondayNoon.setOnClickListener(this);
         imageButtonMondayEvening = (ImageButton) rootView.findViewById(R.id.image_button_monday_evening);
+        imageButtonMondayEvening.setOnClickListener(this);
 
         imageButtonTuesdayMorning = (ImageButton) rootView.findViewById(R.id.image_button_tuesday_morning);
+        imageButtonTuesdayMorning.setOnClickListener(this);
         imageButtonTuesdayNoon = (ImageButton) rootView.findViewById(R.id.image_button_tuesday_noon);
+        imageButtonTuesdayNoon.setOnClickListener(this);
         imageButtonTuesdayEvening = (ImageButton) rootView.findViewById(R.id.image_button_tuesday_evening);
+        imageButtonTuesdayEvening.setOnClickListener(this);
 
         imageButtonWednesdayMorning = (ImageButton) rootView.findViewById(R.id.image_button_wednesday_morning);
+        imageButtonWednesdayMorning.setOnClickListener(this);
         imageButtonWednesdayNoon = (ImageButton) rootView.findViewById(R.id.image_button_wednesday_noon);
+        imageButtonWednesdayNoon.setOnClickListener(this);
         imageButtonWednesdayEvening = (ImageButton) rootView.findViewById(R.id.image_button_wednesday_evening);
+        imageButtonWednesdayEvening.setOnClickListener(this);
 
         imageButtonThursdayMorning = (ImageButton) rootView.findViewById(R.id.image_button_thursday_morning);
+        imageButtonThursdayMorning.setOnClickListener(this);
         imageButtonThursdayNoon = (ImageButton) rootView.findViewById(R.id.image_button_thursday_noon);
+        imageButtonThursdayNoon.setOnClickListener(this);
         imageButtonThursdayEvening = (ImageButton) rootView.findViewById(R.id.image_button_thursday_evening);
+        imageButtonThursdayEvening.setOnClickListener(this);
 
         imageButtonFridayMorning = (ImageButton) rootView.findViewById(R.id.image_button_friday_morning);
+        imageButtonFridayMorning.setOnClickListener(this);
         imageButtonFridayNoon = (ImageButton) rootView.findViewById(R.id.image_button_friday_noon);
+        imageButtonFridayNoon.setOnClickListener(this);
         imageButtonFridayEvening = (ImageButton) rootView.findViewById(R.id.image_button_friday_evening);
+        imageButtonFridayEvening.setOnClickListener(this);
 
         imageButtonSaturdayMorning = (ImageButton) rootView.findViewById(R.id.image_button_saturday_morning);
+        imageButtonSaturdayMorning.setOnClickListener(this);
         imageButtonSaturdayNoon = (ImageButton) rootView.findViewById(R.id.image_button_saturday_noon);
+        imageButtonSaturdayNoon.setOnClickListener(this);
         imageButtonSaturdayEvening = (ImageButton) rootView.findViewById(R.id.image_button_saturday_evening);
+        imageButtonSaturdayEvening.setOnClickListener(this);
 
         imageButtonSundayMorning = (ImageButton) rootView.findViewById(R.id.image_button_sunday_morning);
+        imageButtonSundayMorning.setOnClickListener(this);
         imageButtonSundayNoon = (ImageButton) rootView.findViewById(R.id.image_button_sunday_noon);
+        imageButtonSundayNoon.setOnClickListener(this);
         imageButtonSundayEvening = (ImageButton) rootView.findViewById(R.id.image_button_sunday_evening);
+        imageButtonSundayEvening.setOnClickListener(this);
 
         updateCurrentWeekTextView();
         checkDrawables();
@@ -324,15 +352,125 @@ public class WeekFragment extends Fragment implements View.OnClickListener, Imag
 
     @Override
     public void onClick(View v) {
+
         if (v.getId() == R.id.image_button_next_week) {
             nextWeek();
         } else if (v.getId() == R.id.image_button_previous_week) {
             previousWeek();
+        } else {
+            LayoutInflater layoutInflater
+                    = (LayoutInflater) getActivity().getBaseContext()
+                    .getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
+            View popupView = layoutInflater.inflate(R.layout.popup_window_image_selection, null);
+            final PopupWindow popupWindow = new PopupWindow(
+                    popupView,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            buttonSelected = v;
+
+            PopupWindowButtonHandler popupWindowButtonHandler = new PopupWindowButtonHandler((android.widget.TableLayout) popupView.findViewById(R.id.table_layout_popup), popupWindow, this);
+
+            popupWindow.showAtLocation(rootView, Gravity.CENTER, 0, 0);
         }
     }
 
     @Override
     public void imageWasSelected(HuPlaType huPlaType) {
+        // TODO heute button
+        DataHolder dataHolder = DataHolder.getInstance();
+        HuPlaEntry entry = null;
+        HuPlaEntryDataSource dataSource = new HuPlaEntryDataSource(getActivity());
+        dataSource.open();
 
+
+        GregorianCalendar calendar = (GregorianCalendar) startDate.clone();
+
+        if(buttonSelected.getId() == imageButtonMondayMorning.getId()) {
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.MORNING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.MORNING, calendar);
+        } else if(buttonSelected.getId() == imageButtonMondayNoon.getId()) {
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.NOON);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.NOON, calendar);
+        } else if(buttonSelected.getId() == imageButtonMondayEvening.getId()) {
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.EVENING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.EVENING, calendar);
+        } else if(buttonSelected.getId() == imageButtonTuesdayMorning.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.MORNING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.MORNING, calendar);
+        } else if(buttonSelected.getId() == imageButtonTuesdayNoon.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.NOON);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.NOON, calendar);
+        } else if(buttonSelected.getId() == imageButtonTuesdayEvening.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.EVENING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.EVENING, calendar);
+        } else if(buttonSelected.getId() == imageButtonWednesdayMorning.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 2);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.MORNING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.MORNING, calendar);
+        } else if(buttonSelected.getId() == imageButtonWednesdayNoon.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 2);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.NOON);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.NOON, calendar);
+        } else if(buttonSelected.getId() == imageButtonWednesdayEvening.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 2);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.EVENING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.EVENING, calendar);
+        } else if(buttonSelected.getId() == imageButtonThursdayMorning.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 3);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.MORNING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.MORNING, calendar);
+        } else if(buttonSelected.getId() == imageButtonThursdayNoon.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 3);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.NOON);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.NOON, calendar);
+        } else if(buttonSelected.getId() == imageButtonThursdayEvening.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 3);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.EVENING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.EVENING, calendar);
+        } else if(buttonSelected.getId() == imageButtonFridayMorning.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 4);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.MORNING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.MORNING, calendar);
+        } else if(buttonSelected.getId() == imageButtonFridayNoon.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 4);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.NOON);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.NOON, calendar);
+        } else if(buttonSelected.getId() == imageButtonFridayEvening.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 4);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.EVENING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.EVENING, calendar);
+        } else if(buttonSelected.getId() == imageButtonSaturdayMorning.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 5);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.MORNING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.MORNING, calendar);
+        } else if(buttonSelected.getId() == imageButtonSaturdayNoon.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 5);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.NOON);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.NOON, calendar);
+        } else if(buttonSelected.getId() == imageButtonSaturdayEvening.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 5);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.EVENING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.EVENING, calendar);
+        } else if(buttonSelected.getId() == imageButtonSundayMorning.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 6);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.MORNING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.MORNING, calendar);
+        } else if(buttonSelected.getId() == imageButtonSundayNoon.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 6);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.NOON);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.NOON, calendar);
+        } else if(buttonSelected.getId() == imageButtonSundayEvening.getId()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 6);
+            entry = dataHolder.findHuPlaEntryByCalendar(calendar, HuPlaTime.EVENING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.EVENING, calendar);
+        }
+
+
+        dataSource.close();
+        buttonSelected = null;
+        checkDrawables();
     }
 }

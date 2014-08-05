@@ -136,6 +136,7 @@ public class MonthFragment extends Fragment implements CalendarView.OnDateChange
                 LayoutParams.WRAP_CONTENT,
                 LayoutParams.WRAP_CONTENT);
         buttonSelected = view;
+
         PopupWindowButtonHandler popupWindowButtonHandler = new PopupWindowButtonHandler((android.widget.TableLayout) popupView.findViewById(R.id.table_layout_popup), popupWindow, this);
 
         popupWindow.showAtLocation(rootView, Gravity.CENTER, 0, 0);
@@ -143,54 +144,29 @@ public class MonthFragment extends Fragment implements CalendarView.OnDateChange
 
     @Override
     public void imageWasSelected(HuPlaType huPlaType) {
-        // TODO zurück button im Popup
+        // TODO zurück button im Popup, Settings, Heute Button
 
         DataHolder dataHolder = DataHolder.getInstance();
         HuPlaEntry entry = null;
-
-        if(buttonSelected.equals(imageButtonMorning)) {
-            entry = dataHolder.findHuPlaEntryByDate(lastYear, lastMonth, lastDay, HuPlaTime.MORNING);
-            setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.MORNING);
-        } else if(buttonSelected.equals(imageButtonNoon)) {
-            entry = dataHolder.findHuPlaEntryByDate(lastYear, lastMonth, lastDay, HuPlaTime.NOON);
-            setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.NOON);
-        } else if(buttonSelected.equals(imageButtonEvening)) {
-            entry = dataHolder.findHuPlaEntryByDate(lastYear, lastMonth, lastDay, HuPlaTime.EVENING);
-            setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.EVENING);
-        }
-
-        buttonSelected = null;
-    }
-
-    private void setHuPlaTypeForEntry(HuPlaEntry entry, HuPlaType type, HuPlaTime time) {
-        DataHolder dataHolder = DataHolder.getInstance();
         HuPlaEntryDataSource dataSource = new HuPlaEntryDataSource(getActivity());
         dataSource.open();
 
-        if(entry != null && !type.equals(entry.getHuPlaType())) {
-            dataSource.deleteHuPlaEntry(entry);
-            dataHolder.getEntryList().remove(entry);
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.set(lastYear, lastMonth, lastDay);
 
-            if(type != HuPlaType.NA) {
-                HuPlaEntry newEntry = dataSource.createHuPlaEntry(entry.getDate(), entry.getHuPlaTime(), type);
-
-                if(newEntry != null) {
-                    dataHolder.getEntryList().add(newEntry);
-                }
-            }
-
-
-        } else if(entry == null && type != HuPlaType.NA) {
-            GregorianCalendar calendar = new GregorianCalendar();
-            calendar.set(lastYear, lastMonth, lastDay);
-            HuPlaEntry newEntry = dataSource.createHuPlaEntry(calendar, time, type);
-
-            if(newEntry != null) {
-                dataHolder.getEntryList().add(newEntry);
-            }
+        if(buttonSelected.equals(imageButtonMorning)) {
+            entry = dataHolder.findHuPlaEntryByDate(lastYear, lastMonth, lastDay, HuPlaTime.MORNING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.MORNING, calendar);
+        } else if(buttonSelected.equals(imageButtonNoon)) {
+            entry = dataHolder.findHuPlaEntryByDate(lastYear, lastMonth, lastDay, HuPlaTime.NOON);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.NOON, calendar);
+        } else if(buttonSelected.equals(imageButtonEvening)) {
+            entry = dataHolder.findHuPlaEntryByDate(lastYear, lastMonth, lastDay, HuPlaTime.EVENING);
+            dataSource.setHuPlaTypeForEntry(entry, huPlaType, HuPlaTime.EVENING, calendar);
         }
 
         dataSource.close();
+        buttonSelected = null;
         updateImages();
     }
 }
