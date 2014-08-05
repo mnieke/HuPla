@@ -1,10 +1,6 @@
 package de.n1eke.hupla;
 
-import android.app.Fragment;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +8,9 @@ import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
-import android.widget.ScrollView;
-import android.widget.TableRow;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import de.n1eke.hupla.data.DataHolder;
 import de.n1eke.hupla.data.HuPlaEntry;
@@ -33,7 +25,7 @@ import android.view.ViewGroup.LayoutParams;
 /**
  * Created by michi on 02.08.14.
  */
-public class MonthFragment extends Fragment implements CalendarView.OnDateChangeListener, ImageSelectedListener, View.OnClickListener {
+public class MonthFragment extends HuPlaFragment implements CalendarView.OnDateChangeListener {
 
     private View rootView;
 
@@ -44,6 +36,8 @@ public class MonthFragment extends Fragment implements CalendarView.OnDateChange
     private int lastMonth;
     private int lastDay;
     private View buttonSelected;
+
+    private CalendarView calendarView;
 
     /**
      * The fragment argument representing the section number for this
@@ -65,7 +59,6 @@ public class MonthFragment extends Fragment implements CalendarView.OnDateChange
 
     public MonthFragment() {
 
-
     }
 
     @Override
@@ -73,13 +66,16 @@ public class MonthFragment extends Fragment implements CalendarView.OnDateChange
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_month, container, false);
 
-        CalendarView calendarView = (CalendarView) rootView.findViewById(R.id.calendar_view);
+        calendarView = (CalendarView) rootView.findViewById(R.id.calendar_view);
         calendarView.setOnDateChangeListener(this);
+        ((ImageButton) rootView.findViewById(R.id.button_current_day)).setOnClickListener(this);
 
         imageButtonMorning = (ImageButton) rootView.findViewById(R.id.image_button_morning);
         imageButtonMorning.setOnClickListener(this);
         imageButtonNoon = (ImageButton) rootView.findViewById(R.id.image_button_noon);
+        imageButtonNoon.setOnClickListener(this);
         imageButtonEvening = (ImageButton) rootView.findViewById(R.id.image_button_evening);
+        imageButtonEvening.setOnClickListener(this);
 
         GregorianCalendar calendar = new GregorianCalendar();
         onSelectedDayChange(null, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
@@ -96,10 +92,10 @@ public class MonthFragment extends Fragment implements CalendarView.OnDateChange
         lastMonth = month;
         lastDay = dayOfMonth;
 
-        updateImages();
+        updateEntries();
     }
 
-    private void updateImages() {
+    public void updateEntries() {
         DataHolder dataHolder = DataHolder.getInstance();
 
         HuPlaEntry morningEntry = dataHolder.findHuPlaEntryByDate(lastYear, lastMonth, lastDay, HuPlaTime.MORNING);
@@ -127,24 +123,35 @@ public class MonthFragment extends Fragment implements CalendarView.OnDateChange
 
     @Override
     public void onClick(View view) {
-        LayoutInflater layoutInflater
-                = (LayoutInflater) getActivity().getBaseContext()
-                .getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
-        View popupView = layoutInflater.inflate(R.layout.popup_window_image_selection, null);
-        final PopupWindow popupWindow = new PopupWindow(
-                popupView,
-                LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT);
-        buttonSelected = view;
+        if(view.getId() == R.id.button_current_day) {
+            calendarView.setDate(System.currentTimeMillis());
+        } else {
+            LayoutInflater layoutInflater
+                    = (LayoutInflater) getActivity().getBaseContext()
+                    .getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
+            View popupView = layoutInflater.inflate(R.layout.popup_window_image_selection, null);
+            final PopupWindow popupWindow = new PopupWindow(
+                    popupView,
+                    LayoutParams.WRAP_CONTENT,
+                    LayoutParams.WRAP_CONTENT);
+            buttonSelected = view;
 
-        PopupWindowButtonHandler popupWindowButtonHandler = new PopupWindowButtonHandler((android.widget.TableLayout) popupView.findViewById(R.id.table_layout_popup), popupWindow, this);
+            PopupWindowButtonHandler popupWindowButtonHandler = new PopupWindowButtonHandler((android.widget.TableLayout) popupView.findViewById(R.id.table_layout_popup), popupWindow, this);
 
-        popupWindow.showAtLocation(rootView, Gravity.CENTER, 0, 0);
+            this.popupWindow = popupWindow;
+            popupWindow.showAtLocation(rootView, Gravity.CENTER, 0, 0);
+            isPopupOpened = true;
+        }
+
     }
 
     @Override
     public void imageWasSelected(HuPlaType huPlaType) {
-        // TODO zurück button im Popup, Settings, Heute Button
+        isPopupOpened = false;
+        // TODO zurück button im Popup, Settings
+        if(huPlaType == null) {
+            return;
+        }
 
         DataHolder dataHolder = DataHolder.getInstance();
         HuPlaEntry entry = null;
@@ -167,6 +174,6 @@ public class MonthFragment extends Fragment implements CalendarView.OnDateChange
 
         dataSource.close();
         buttonSelected = null;
-        updateImages();
+        updateEntries();
     }
 }

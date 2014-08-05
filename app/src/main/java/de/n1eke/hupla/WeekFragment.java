@@ -1,22 +1,16 @@
 package de.n1eke.hupla;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 
 import de.n1eke.hupla.data.DataHolder;
 import de.n1eke.hupla.data.HuPlaEntry;
@@ -28,11 +22,11 @@ import de.n1eke.hupla.data.PopupWindowButtonHandler;
 /**
  * Created by michi on 02.08.14.
  */
-public class WeekFragment extends Fragment implements View.OnClickListener, ImageSelectedListener {
+public class WeekFragment extends HuPlaFragment {
 
     private View rootView;
 
-    private TextView currentWeekTextView;
+    private Button buttonCurrentWeek;
 
     private GregorianCalendar startDate;
     private GregorianCalendar endDate;
@@ -98,11 +92,8 @@ public class WeekFragment extends Fragment implements View.OnClickListener, Imag
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_week, container, false);
 
-        currentWeekTextView = (TextView) rootView.findViewById(R.id.text_view_week);
-        startDate = new GregorianCalendar();
-        startDate.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        endDate = new GregorianCalendar();
-        endDate.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        buttonCurrentWeek = (Button) rootView.findViewById(R.id.button_current_week);
+        buttonCurrentWeek.setOnClickListener(this);
 
         ((ImageButton) rootView.findViewById(R.id.image_button_next_week)).setOnClickListener(this);
         ((ImageButton) rootView.findViewById(R.id.image_button_previous_week)).setOnClickListener(this);
@@ -156,8 +147,9 @@ public class WeekFragment extends Fragment implements View.OnClickListener, Imag
         imageButtonSundayEvening = (ImageButton) rootView.findViewById(R.id.image_button_sunday_evening);
         imageButtonSundayEvening.setOnClickListener(this);
 
-        updateCurrentWeekTextView();
-        checkDrawables();
+        resetDate();
+        updateCurrentWeekButtonText();
+        updateEntries();
         return rootView;
     }
 
@@ -173,15 +165,22 @@ public class WeekFragment extends Fragment implements View.OnClickListener, Imag
         startDate.add(Calendar.DAY_OF_MONTH, days);
         endDate.add(Calendar.DAY_OF_MONTH, days);
 
-        updateCurrentWeekTextView();
-        checkDrawables();
+        updateCurrentWeekButtonText();
+        updateEntries();
     }
 
-    private void updateCurrentWeekTextView() {
-        currentWeekTextView.setText(startDate.get(Calendar.DAY_OF_MONTH) + "." + startDate.get(Calendar.MONTH) + "." + startDate.get(Calendar.YEAR) + " - " + endDate.get(Calendar.DAY_OF_MONTH) + "." + endDate.get(Calendar.MONTH) + "." + endDate.get(Calendar.YEAR));
+    private void updateCurrentWeekButtonText() {
+        buttonCurrentWeek.setText(startDate.get(Calendar.DAY_OF_MONTH) + "." + startDate.get(Calendar.MONTH) + "." + startDate.get(Calendar.YEAR) + " - " + endDate.get(Calendar.DAY_OF_MONTH) + "." + endDate.get(Calendar.MONTH) + "." + endDate.get(Calendar.YEAR));
     }
 
-    private void checkDrawables() {
+    private void resetDate() {
+        startDate = new GregorianCalendar();
+        startDate.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        endDate = new GregorianCalendar();
+        endDate.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+    }
+
+    public void updateEntries() {
         DataHolder dataHolder = DataHolder.getInstance();
         GregorianCalendar tempCalendar = (GregorianCalendar) startDate.clone();
 
@@ -357,6 +356,10 @@ public class WeekFragment extends Fragment implements View.OnClickListener, Imag
             nextWeek();
         } else if (v.getId() == R.id.image_button_previous_week) {
             previousWeek();
+        } else if(v.getId() == buttonCurrentWeek.getId()) {
+            resetDate();
+            updateCurrentWeekButtonText();
+            updateEntries();
         } else {
             LayoutInflater layoutInflater
                     = (LayoutInflater) getActivity().getBaseContext()
@@ -367,16 +370,21 @@ public class WeekFragment extends Fragment implements View.OnClickListener, Imag
                     ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
             buttonSelected = v;
-
+            this.popupWindow = popupWindow;
             PopupWindowButtonHandler popupWindowButtonHandler = new PopupWindowButtonHandler((android.widget.TableLayout) popupView.findViewById(R.id.table_layout_popup), popupWindow, this);
 
             popupWindow.showAtLocation(rootView, Gravity.CENTER, 0, 0);
+            isPopupOpened = true;
         }
     }
 
     @Override
     public void imageWasSelected(HuPlaType huPlaType) {
-        // TODO heute button
+        isPopupOpened = false;
+        if(huPlaType == null) {
+            return;
+        }
+
         DataHolder dataHolder = DataHolder.getInstance();
         HuPlaEntry entry = null;
         HuPlaEntryDataSource dataSource = new HuPlaEntryDataSource(getActivity());
@@ -471,6 +479,6 @@ public class WeekFragment extends Fragment implements View.OnClickListener, Imag
 
         dataSource.close();
         buttonSelected = null;
-        checkDrawables();
+        updateEntries();
     }
 }

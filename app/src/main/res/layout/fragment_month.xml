@@ -10,12 +10,23 @@
     tools:context=".HuPlaActivity$PlaceholderFragment"
     android:orientation="vertical">
 
+
+
     <CalendarView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_gravity="top"
         android:id="@+id/calendar_view">
+
+        <ImageButton
+            android:id="@+id/button_current_day"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="30dp"
+            android:src="@drawable/calendar_today"
+            android:layout_height="30dp"
+            android:scaleType="fitCenter"
+            android:layout_gravity="left"/>
     </CalendarView>
 
 

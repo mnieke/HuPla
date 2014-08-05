@@ -12,6 +12,7 @@ import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -22,7 +23,7 @@ import de.n1eke.hupla.data.HuPlaTime;
 import de.n1eke.hupla.data.HuPlaType;
 
 
-public class HuPlaActivity extends Activity {
+public class HuPlaActivity extends Activity implements ViewPager.OnPageChangeListener{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -37,7 +38,9 @@ public class HuPlaActivity extends Activity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    ViewPager mViewPager;
+    private ViewPager mViewPager;
+    private WeekFragment weekFragment;
+    private MonthFragment monthFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +55,8 @@ public class HuPlaActivity extends Activity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setOnPageChangeListener(this);
 
-        // Getting the data out of the SQL database
-        HuPlaEntryDataSource dataSource = new HuPlaEntryDataSource(this);
-        dataSource.open();
-        // Dummy data
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.set(2014, Calendar.AUGUST, 5);
-//        HuPlaEntry entry = dataSource.createHuPlaEntry(calendar, HuPlaTime.NOON, HuPlaType.WOLF);
-
-        DataHolder.getInstance().setEntryList(dataSource.getAllHuPlaEntries());
-        dataSource.close();
     }
 
 
@@ -85,6 +79,51 @@ public class HuPlaActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        switch (position) {
+            case 0:
+                if(weekFragment != null)
+                    weekFragment.updateEntries();
+            case 1:
+                if(monthFragment != null)
+                    monthFragment.updateEntries();
+                default:
+                    if(weekFragment != null)
+                        weekFragment.updateEntries();
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            boolean onePopupOpened = false;
+
+            if(weekFragment.isPopupOpened()) {
+                onePopupOpened = true;
+                weekFragment.closePopup();
+            }
+            if(monthFragment.isPopupOpened()) {
+                onePopupOpened = true;
+                monthFragment.closePopup();
+            }
+            if(onePopupOpened) {
+                return true;
+            }
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -99,14 +138,16 @@ public class HuPlaActivity extends Activity {
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    return WeekFragment.newInstance(position + 1);
+                    weekFragment = WeekFragment.newInstance(position+1);
+                    return weekFragment;
                 case 1:
-                    return MonthFragment.newInstance(position + 1);
+                    monthFragment = MonthFragment.newInstance(position + 1);
+                    return monthFragment;
                 default:
-                    return WeekFragment.newInstance(position + 1);
+                    weekFragment = WeekFragment.newInstance(position+1);
+                    return weekFragment;
             }
         }
 

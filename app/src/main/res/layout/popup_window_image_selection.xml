@@ -184,12 +184,13 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal">
 
-            <ImageButton
+            <Button
+                android:id="@+id/button_cancel"
                 style="?android:attr/borderlessButtonStyle"
                 android:clickable="false"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:scaleType="fitCenter"
+                android:text="Cancel"
                 android:paddingRight="5dp"
                 android:paddingLeft="5dp"
                 />

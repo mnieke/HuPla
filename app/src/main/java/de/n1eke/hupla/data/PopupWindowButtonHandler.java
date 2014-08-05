@@ -42,6 +42,8 @@ public class PopupWindowButtonHandler implements View.OnClickListener{
     }
 
 
+
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -69,8 +71,11 @@ public class PopupWindowButtonHandler implements View.OnClickListener{
             huPlaType = HuPlaType.DOG;
         } else if(id == R.id.image_button_na) {
             huPlaType = HuPlaType.NA;
-        } else {
-            huPlaType = HuPlaType.NA;
+        } else if(id == R.id.button_cancel) {
+            huPlaType = null;
+        }
+        else {
+            huPlaType = null;
         }
 
         imageSelectedListener.imageWasSelected(huPlaType);
