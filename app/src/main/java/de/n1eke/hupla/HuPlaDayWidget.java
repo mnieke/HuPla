@@ -21,6 +21,8 @@ import de.n1eke.hupla.data.HuPlaType;
  */
 public class HuPlaDayWidget extends AppWidgetProvider {
 
+    // TODO beim draufklicken App öffnen
+
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
@@ -60,26 +62,20 @@ public class HuPlaDayWidget extends AppWidgetProvider {
 
         views.setTextViewText(R.id.text_view_day_widget_date, "Hundeplan for: "+calendar.get(Calendar.DAY_OF_MONTH)+"."+(calendar.get(Calendar.MONTH)+1)+"."+calendar.get(Calendar.YEAR));
 
-        if(morningEntry != null) {
-            views.setImageViewResource(R.id.image_view_day_widget_morning, morningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_day_widget_morning, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(noonEntry != null) {
-            views.setImageViewResource(R.id.image_view_day_widget_noon, noonEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_day_widget_noon, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(eveningEntry != null) {
-            views.setImageViewResource(R.id.image_view_day_widget_evening, eveningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_day_widget_evening, HuPlaType.NA.getDrawbaleId());
-        }
+        addImageFromHuPlaEntryToView(views, morningEntry, R.id.image_view_day_widget_morning);
+        addImageFromHuPlaEntryToView(views, noonEntry, R.id.image_view_day_widget_noon);
+        addImageFromHuPlaEntryToView(views, eveningEntry, R.id.image_view_day_widget_evening);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
+    }
+
+    private static void addImageFromHuPlaEntryToView(RemoteViews views, HuPlaEntry entry, int imageID) {
+        if(entry != null) {
+            views.setImageViewResource(imageID, entry.getHuPlaType().getDrawbaleId());
+        }else {
+            views.setImageViewResource(imageID, HuPlaType.NA.getDrawbaleId());
+        }
     }
 }
 

@@ -186,167 +186,91 @@ public class WeekFragment extends HuPlaFragment {
 
         // Get entries for monday and set the image button images
         HuPlaEntry mondayMorningEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.MORNING);
-        if (mondayMorningEntry != null) {
-            imageButtonMondayMorning.setImageResource(mondayMorningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonMondayMorning.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(mondayMorningEntry, imageButtonMondayMorning);
 
         HuPlaEntry mondayNoonEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.NOON);
-        if (mondayNoonEntry != null) {
-            imageButtonMondayNoon.setImageResource(mondayNoonEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonMondayNoon.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(mondayNoonEntry, imageButtonMondayNoon);
 
         HuPlaEntry mondayEveningEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.EVENING);
-        if (mondayEveningEntry != null) {
-            imageButtonMondayEvening.setImageResource(mondayEveningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonMondayEvening.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(mondayEveningEntry, imageButtonMondayEvening);
 
         // Get entries for tuesday and set the image button images
         tempCalendar.add(Calendar.DAY_OF_MONTH, 1);
         HuPlaEntry tuesdayMorningEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.MORNING);
-        if (tuesdayMorningEntry != null) {
-            imageButtonTuesdayMorning.setImageResource(tuesdayMorningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonTuesdayMorning.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(tuesdayMorningEntry, imageButtonTuesdayMorning);
 
         HuPlaEntry tuesdayNoonEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.NOON);
-        if (tuesdayNoonEntry != null) {
-            imageButtonTuesdayNoon.setImageResource(tuesdayNoonEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonTuesdayNoon.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(tuesdayNoonEntry, imageButtonTuesdayNoon);
 
         HuPlaEntry tuesdayEveningEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.EVENING);
-        if (tuesdayEveningEntry != null) {
-            imageButtonTuesdayEvening.setImageResource(tuesdayEveningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonTuesdayEvening.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(tuesdayEveningEntry, imageButtonTuesdayEvening);
 
         // Get entries for wednesday and set the image button images
         tempCalendar.add(Calendar.DAY_OF_MONTH, 1);
         HuPlaEntry wednesdayMorningEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.MORNING);
-        if (wednesdayMorningEntry != null) {
-            imageButtonWednesdayMorning.setImageResource(wednesdayMorningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonWednesdayMorning.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(wednesdayMorningEntry, imageButtonWednesdayMorning);
 
         HuPlaEntry wednesdayNoonEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.NOON);
-        if (wednesdayNoonEntry != null) {
-            imageButtonWednesdayNoon.setImageResource(wednesdayNoonEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonWednesdayNoon.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(wednesdayNoonEntry, imageButtonWednesdayNoon);
 
         HuPlaEntry wednesdayEveningEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.EVENING);
-        if (wednesdayEveningEntry != null) {
-            imageButtonWednesdayEvening.setImageResource(wednesdayEveningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonWednesdayEvening.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(wednesdayEveningEntry, imageButtonWednesdayEvening);
 
         // Get entries for thursday and set the image button images
         tempCalendar.add(Calendar.DAY_OF_MONTH, 1);
         HuPlaEntry thursdayMorningEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.MORNING);
-        if (thursdayMorningEntry != null) {
-            imageButtonThursdayMorning.setImageResource(thursdayMorningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonThursdayMorning.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(thursdayMorningEntry, imageButtonThursdayMorning);
 
         HuPlaEntry thursdayNoonEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.NOON);
-        if (thursdayNoonEntry != null) {
-            imageButtonThursdayNoon.setImageResource(thursdayNoonEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonThursdayNoon.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(thursdayNoonEntry, imageButtonThursdayNoon);
 
         HuPlaEntry thursdayEveningEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.EVENING);
-        if (thursdayEveningEntry != null) {
-            imageButtonThursdayEvening.setImageResource(thursdayEveningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonThursdayEvening.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(thursdayEveningEntry, imageButtonThursdayEvening);
 
         // Get entries for friday and set the image button images
         tempCalendar.add(Calendar.DAY_OF_MONTH, 1);
         HuPlaEntry fridayMorningEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.MORNING);
-        if (fridayMorningEntry != null) {
-            imageButtonFridayMorning.setImageResource(fridayMorningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonFridayMorning.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(fridayMorningEntry, imageButtonFridayMorning);
 
         HuPlaEntry fridayNoonEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.NOON);
-        if (fridayNoonEntry != null) {
-            imageButtonFridayNoon.setImageResource(fridayNoonEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonFridayNoon.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(fridayNoonEntry, imageButtonFridayNoon);
 
         HuPlaEntry fridayEveningEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.EVENING);
-        if (fridayEveningEntry != null) {
-            imageButtonFridayEvening.setImageResource(fridayEveningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonFridayEvening.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(fridayEveningEntry, imageButtonFridayEvening);
 
 
         // Get entries for saturday and set the image button images
         tempCalendar.add(Calendar.DAY_OF_MONTH, 1);
         HuPlaEntry saturdayMorningEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.MORNING);
-        if (saturdayMorningEntry != null) {
-            imageButtonSaturdayMorning.setImageResource(saturdayMorningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonSaturdayMorning.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(saturdayMorningEntry, imageButtonSaturdayMorning);
 
         HuPlaEntry saturdayNoonEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.NOON);
-        if (saturdayNoonEntry != null) {
-            imageButtonSaturdayNoon.setImageResource(saturdayNoonEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonSaturdayNoon.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(saturdayNoonEntry, imageButtonSaturdayNoon);
 
         HuPlaEntry saturdayEveningEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.EVENING);
-        if (saturdayEveningEntry != null) {
-            imageButtonSaturdayEvening.setImageResource(saturdayEveningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonSaturdayEvening.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(saturdayEveningEntry, imageButtonSaturdayEvening);
 
 
         // Get entries for sunday and set the image button images
         tempCalendar.add(Calendar.DAY_OF_MONTH, 1);
         HuPlaEntry sundayMorningEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.MORNING);
-        if (sundayMorningEntry != null) {
-            imageButtonSundayMorning.setImageResource(sundayMorningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonSundayMorning.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(sundayMorningEntry, imageButtonSundayMorning);
 
         HuPlaEntry sundayNoonEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.NOON);
-        if (sundayNoonEntry != null) {
-            imageButtonSundayNoon.setImageResource(sundayNoonEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            imageButtonSundayNoon.setImageResource(HuPlaType.NA.getDrawbaleId());
-        }
+        setImageButtonSource(sundayNoonEntry, imageButtonSundayNoon);
 
         HuPlaEntry sundayEveningEntry = dataHolder.findHuPlaEntryByDate(tempCalendar.get(Calendar.YEAR), tempCalendar.get(Calendar.MONTH), tempCalendar.get(Calendar.DAY_OF_MONTH), HuPlaTime.EVENING);
-        if (sundayEveningEntry != null) {
-            imageButtonSundayEvening.setImageResource(sundayEveningEntry.getHuPlaType().getDrawbaleId());
+        setImageButtonSource(sundayEveningEntry, imageButtonSundayEvening);
+
+
+    }
+
+    private void setImageButtonSource(HuPlaEntry entry, ImageButton imageButton) {
+        if (entry != null) {
+            imageButton.setImageResource(entry.getHuPlaType().getDrawbaleId());
         } else {
-            imageButtonSundayEvening.setImageResource(HuPlaType.NA.getDrawbaleId());
+            imageButton.setImageResource(HuPlaType.NA.getDrawbaleId());
         }
-
-
     }
 
     @Override

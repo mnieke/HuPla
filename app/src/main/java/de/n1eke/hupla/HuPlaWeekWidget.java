@@ -20,6 +20,8 @@ import de.n1eke.hupla.data.HuPlaType;
  */
 public class HuPlaWeekWidget extends AppWidgetProvider {
 
+    // TODO beim draufklicken App öffnen
+
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
@@ -102,142 +104,52 @@ public class HuPlaWeekWidget extends AppWidgetProvider {
         // Set new images for ImageViews
 
         // Images for monday
-        if(mondayMorningEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_monday_morning, mondayMorningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_monday_morning, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(mondayNoonEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_monday_noon, mondayNoonEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_monday_noon, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(mondayEveningEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_monday_evening, mondayEveningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_monday_evening, HuPlaType.NA.getDrawbaleId());
-        }
+        addImageFromHuPlaEntryToView(views, mondayMorningEntry, R.id.image_view_week_widget_monday_morning);
+        addImageFromHuPlaEntryToView(views, mondayNoonEntry, R.id.image_view_week_widget_monday_noon);
+        addImageFromHuPlaEntryToView(views, mondayEveningEntry, R.id.image_view_week_widget_monday_evening);
 
         // Images for tuesday
-        if(tuesdayMorningEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_tuesday_morning, tuesdayMorningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_tuesday_morning, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(tuesdayNoonEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_tuesday_noon, tuesdayNoonEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_tuesday_noon, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(tuesdayEveningEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_tuesday_evening, tuesdayEveningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_tuesday_evening, HuPlaType.NA.getDrawbaleId());
-        }
+        addImageFromHuPlaEntryToView(views, tuesdayMorningEntry, R.id.image_view_week_widget_tuesday_morning);
+        addImageFromHuPlaEntryToView(views, tuesdayNoonEntry, R.id.image_view_week_widget_tuesday_noon);
+        addImageFromHuPlaEntryToView(views, tuesdayEveningEntry, R.id.image_view_week_widget_tuesday_evening);
 
         // Images for wednesday
-        if(wednesdayMorningEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_wednesday_morning, wednesdayMorningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_wednesday_morning, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(wednesdayNoonEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_wednesday_noon, wednesdayNoonEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_wednesday_noon, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(wednesdayEveningEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_wednesday_evening, wednesdayEveningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_wednesday_evening, HuPlaType.NA.getDrawbaleId());
-        }
+        addImageFromHuPlaEntryToView(views, wednesdayMorningEntry, R.id.image_view_week_widget_wednesday_morning);
+        addImageFromHuPlaEntryToView(views, wednesdayNoonEntry, R.id.image_view_week_widget_wednesday_noon);
+        addImageFromHuPlaEntryToView(views, wednesdayEveningEntry, R.id.image_view_week_widget_wednesday_evening);
 
         // Images for thursday
-        if(thursdayMorningEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_thursday_morning, thursdayMorningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_thursday_morning, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(thursdayNoonEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_thursday_noon, thursdayNoonEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_thursday_noon, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(thursdayEveningEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_thursday_evening, thursdayEveningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_thursday_evening, HuPlaType.NA.getDrawbaleId());
-        }
+        addImageFromHuPlaEntryToView(views, thursdayMorningEntry, R.id.image_view_week_widget_thursday_morning);
+        addImageFromHuPlaEntryToView(views, thursdayNoonEntry, R.id.image_view_week_widget_thursday_noon);
+        addImageFromHuPlaEntryToView(views, thursdayEveningEntry, R.id.image_view_week_widget_thursday_evening);
 
         // Images for friday
-        if(fridayMorningEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_friday_morning, fridayMorningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_friday_morning, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(fridayNoonEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_friday_noon, fridayNoonEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_friday_noon, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(fridayEveningEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_friday_evening, fridayEveningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_friday_evening, HuPlaType.NA.getDrawbaleId());
-        }
+        addImageFromHuPlaEntryToView(views, fridayMorningEntry, R.id.image_view_week_widget_friday_morning);
+        addImageFromHuPlaEntryToView(views, fridayNoonEntry, R.id.image_view_week_widget_friday_noon);
+        addImageFromHuPlaEntryToView(views, fridayEveningEntry, R.id.image_view_week_widget_friday_evening);
 
         // Images for saturday
-        if(saturdayMorningEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_saturday_morning, saturdayMorningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_saturday_morning, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(saturdayNoonEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_saturday_noon, saturdayNoonEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_saturday_noon, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(saturdayEveningEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_saturday_evening, saturdayEveningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_saturday_evening, HuPlaType.NA.getDrawbaleId());
-        }
+        addImageFromHuPlaEntryToView(views, saturdayMorningEntry, R.id.image_view_week_widget_saturday_morning);
+        addImageFromHuPlaEntryToView(views, saturdayNoonEntry, R.id.image_view_week_widget_saturday_noon);
+        addImageFromHuPlaEntryToView(views, saturdayEveningEntry, R.id.image_view_week_widget_saturday_evening);
 
         // Images for sunday
-        if(sundayMorningEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_sunday_morning, sundayMorningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_sunday_morning, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(sundayNoonEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_sunday_noon, sundayNoonEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_sunday_noon, HuPlaType.NA.getDrawbaleId());
-        }
-
-        if(sundayEveningEntry != null) {
-            views.setImageViewResource(R.id.image_view_week_widget_sunday_evening, sundayEveningEntry.getHuPlaType().getDrawbaleId());
-        } else {
-            views.setImageViewResource(R.id.image_view_week_widget_sunday_evening, HuPlaType.NA.getDrawbaleId());
-        }
+        addImageFromHuPlaEntryToView(views, sundayMorningEntry, R.id.image_view_week_widget_sunday_morning);
+        addImageFromHuPlaEntryToView(views, sundayNoonEntry, R.id.image_view_week_widget_sunday_noon);
+        addImageFromHuPlaEntryToView(views, sundayEveningEntry, R.id.image_view_week_widget_sunday_evening);
 
 
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
+    }
+
+    private static void addImageFromHuPlaEntryToView(RemoteViews views, HuPlaEntry entry, int imageID) {
+        if(entry != null) {
+            views.setImageViewResource(imageID, entry.getHuPlaType().getDrawbaleId());
+        }else {
+            views.setImageViewResource(imageID, HuPlaType.NA.getDrawbaleId());
+        }
     }
 }
 
